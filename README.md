@@ -1,28 +1,28 @@
-# Text Generation using Recurrent Long Short-Term Memory (LSTM) Network
+# Text Generation using Recurrent LSTM
 
-A deep learning project that generates human-like text using a Recurrent Neural Network (RNN) with Long Short-Term Memory (LSTM). The model is trained on a large text dataset at the character level and learns sequential patterns to generate new text based on a user-provided seed.
+A deep learning project that generates human-like text using a Recurrent Long Short-Term Memory (LSTM) network. The model is trained on a large text corpus at the character level and learns sequential patterns to predict the next character, enabling it to generate new text from a given seed.
 
 ---
 
 ## 📌 Project Overview
 
-Text generation is a Natural Language Processing (NLP) task where a model predicts the next character in a sequence based on previously seen characters. In this project, an LSTM network is trained on a large corpus of text to learn language patterns and generate realistic text one character at a time.
+This project demonstrates character-level text generation using a Recurrent Neural Network (RNN) with Long Short-Term Memory (LSTM). The model is trained on textual data to learn language patterns and generate coherent text one character at a time.
 
-The model uses TensorFlow and Keras for training and inference. After training, users can provide a starting phrase (seed text), and the model generates new text by predicting one character at a time.
+The project is implemented using TensorFlow and Keras, with preprocessing techniques such as character encoding and sequence generation.
 
 ---
 
 ## 🚀 Features
 
-- Character-level text generation using LSTM
-- Automatic vocabulary creation from dataset
-- Character-to-index and index-to-character encoding
-- Sequence generation using TensorFlow Dataset API
-- Embedding layer for dense character representation
+- Character-level text generation
+- Text preprocessing and encoding
+- Character-to-index and index-to-character mapping
+- Sequence creation using TensorFlow Dataset API
+- Embedding layer for character representation
 - LSTM-based sequence modeling
-- Configurable text generation temperature
-- User-defined seed text
-- Random text generation after training
+- Adjustable temperature for controlling randomness
+- User-defined seed text generation
+- Trained model saved for future inference
 
 ---
 
@@ -38,75 +38,71 @@ The model uses TensorFlow and Keras for training and inference. After training, 
 
 ## 📂 Dataset
 
-The project uses a CSV file containing textual data.
+The model is trained on a CSV dataset containing textual data.
 
-Dataset format:
-
-| Column |
-|---------|
-| text |
-
-All text samples are merged into a single corpus after:
+Preprocessing steps include:
 
 - Removing missing values
 - Converting text to lowercase
+- Creating character vocabulary
+- Encoding characters into integer indices
+- Generating fixed-length sequences
 
 ---
 
-## ⚙️ Project Workflow
+## ⚙️ Workflow
 
 ### 1. Load Dataset
 
-- Read CSV dataset
-- Remove null values
-- Merge all text into one corpus
+- Read CSV file
+- Merge all text into a single corpus
 - Convert text to lowercase
-
----
 
 ### 2. Text Preprocessing
 
-- Create vocabulary of unique characters
+- Create vocabulary
 - Character encoding
-- Integer encoding of text
 - Generate input-target sequences
-- Shuffle dataset
-- Batch dataset for training
+- Shuffle and batch the dataset
 
----
+### 3. Build LSTM Model
 
-### 3. Model Architecture
-
-The model consists of:
+The architecture consists of:
 
 - Embedding Layer
 - LSTM Layer
 - Dense Output Layer
 
-Architecture:
-
 ```
-Input Characters
-       │
-       ▼
+Input Text
+     │
+     ▼
 Embedding Layer
-       │
-       ▼
-LSTM Layer (128 Units)
-       │
-       ▼
+     │
+     ▼
+LSTM Layer
+     │
+     ▼
 Dense Layer
-       │
-       ▼
-Predicted Next Character
+     │
+     ▼
+Next Character Prediction
 ```
+
+### 4. Train Model
+
+The model learns to predict the next character in a sequence using Sparse Categorical Crossentropy loss and the Adam optimizer.
+
+### 5. Generate Text
+
+After training, users can provide a starting string (seed text), and the model generates new text character by character.
 
 ---
 
 ## 📊 Model Configuration
 
 | Parameter | Value |
-|------------|--------|
+|-----------|-------|
 | Sequence Length | 100 |
 | Embedding Dimension | 64 |
 | LSTM Units | 128 |
@@ -117,46 +113,15 @@ Predicted Next Character
 
 ---
 
-## 🧠 Training
-
-The model is trained using character sequences where:
-
-- Input = First 100 characters
-- Target = Next 100 characters shifted by one position
-
-The network learns to predict the next character in the sequence.
-
----
-
-## ✨ Text Generation
-
-After training, the model generates text using:
-
-- Seed text provided by the user
-- Temperature sampling for controlling randomness
-- Character-by-character prediction
-
-Temperature values:
-
-| Temperature | Output |
-|--------------|--------|
-| 0.2 | Very predictable |
-| 0.5 | Less random |
-| 0.8 | Balanced |
-| 1.0 | Creative |
-| >1.0 | Highly random |
-
----
-
 ## 📁 Project Structure
 
 ```
-Text-Generation-LSTM/
+text-generation-using-recurrent-LSTM/
 │
-├── train.csv
-├── text_generation_lstm.ipynb
 ├── README.md
-└── requirements.txt
+├── char_maps.pkl
+├── text_generation_using_recurrent_LSTM (3).ipynb
+└── text_lstm_model.keras
 ```
 
 ---
@@ -166,42 +131,44 @@ Text-Generation-LSTM/
 ### Clone Repository
 
 ```bash
-git clone https://github.com/your-username/Text-Generation-LSTM.git
+git clone https://github.com/pallavi0120/text-generation-using-recurrent-LSTM.git
 ```
 
 ### Install Dependencies
 
 ```bash
-pip install tensorflow pandas numpy
+pip install tensorflow numpy pandas
 ```
 
-### Run
+### Run the Notebook
 
-Open the notebook:
+Open:
 
 ```
-text_generation_lstm.ipynb
+text_generation_using_recurrent_LSTM (3).ipynb
 ```
 
-Run all cells sequentially.
+Run all cells sequentially to:
+
+- Load the dataset
+- Train the LSTM model
+- Generate new text
 
 ---
 
 ## 📈 Sample Output
 
-Input Seed:
+**Input Seed**
 
 ```
 The
 ```
 
-Generated Text:
+**Generated Text**
 
 ```
-The uster mp fo haveun fre anth to wasicore s mprmalitrsall win a f r pens. tmilerin inthentin s vistha as. in fout wr pres bla an ivo “ithe bed o, ase tay s fed ste “trinsppove a atond d s.
+The uster mp fo haveun fre anth to wasicore s mprmalitrsall win a f r pens. tmilerin inthentin s vistha as. in fout wr pres bla an ivo "ithe bed o, ase tay s fed ste trinsppove a atond d s.
 ```
-
-The generated text becomes more coherent with larger datasets, longer training, and hyperparameter tuning.
 
 ---
 
@@ -210,18 +177,17 @@ The generated text becomes more coherent with larger datasets, longer training, 
 - Word-level text generation
 - Multi-layer LSTM architecture
 - Bidirectional LSTM
-- GRU-based text generation
+- GRU implementation
 - Transformer-based language models
 - Model checkpointing
-- Beam search decoding
-- Web interface using Flask or Streamlit
-- Fine-tuning on domain-specific datasets
+- Streamlit or Flask web application
+- Fine-tuning on custom datasets
 
 ---
 
 ## 📚 Learning Outcomes
 
-Through this project, the following concepts were explored:
+This project helped in understanding:
 
 - Natural Language Processing (NLP)
 - Character-level language modeling
@@ -229,7 +195,6 @@ Through this project, the following concepts were explored:
 - Long Short-Term Memory (LSTM)
 - Text preprocessing
 - Sequence generation
-- Embedding layers
 - TensorFlow Dataset API
 - Deep learning model training
 - Probabilistic text generation
@@ -243,6 +208,3 @@ Through this project, the following concepts were explored:
 B.Tech Electronics and Communication Engineering
 
 Interested in Artificial Intelligence, Machine Learning, and Software Development.
-
----
-```
